@@ -1,23 +1,21 @@
-module Golf where
-
-
+module Golf(
+    skips
+) where
 --Problem 1
+
 skips :: [a] -> [[a]]
 skips xs = skipsNRec (length xs) xs
 
-skipsNRec :: int -> [a] -> [[a]]
-skipsNRec 1 xs = [xs] 
-skipsNRec n xs = (skipsNRec (n-1) xs) ++ (skipsN n xs)
+skipsNRec :: Int -> [a] -> [[a]]
+skipsNRec 0 xs = []
+skipsNRec 1 xs = [xs]
+skipsNRec n xs = skipsNRec (n-1) xs++[skipsN n (drop (n-1) xs)]
 
-skipsN :: int -> [a] -> [a]
+skipsN :: Int -> [a] -> [a]
 skipsN n [] = []
-skipsN n xs = (getN n xs) ++ skipsN n (drop n xs)
+skipsN n (x:xs) = x : skipsN n (drop n (x:xs))
 
-getN :: int -> [a] -> [a]
-getN n [] = []
-getN n x:xs = getN (n-1) xs
-getN 0 x:xs = x
-
-
-
-
+-- skips takes the list and calls the recursive funciton skipsNRec, giving it
+-- the list length as the parameter n. skipsNRec then calls skipsN, which transforms
+-- the input list into a list with only every n'th element. Then skipsNRec is called 
+-- again but this time with n-1 as the element to be extracted. 
