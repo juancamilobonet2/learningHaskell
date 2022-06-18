@@ -48,7 +48,7 @@ histogram xs = makeLines (counter xs 9) ++ "==========\n0123456789"
 makeLines :: [Integer] -> String
 makeLines xs
     | (maximum xs) == 0 = ""
-    | otherwise = makeLine (map (+(-1)) xs) ++ makeLine xs
+    | otherwise = makeLines (map (+(-1)) xs) ++ makeLine xs
 
 makeLine :: [Integer] -> String
 makeLine [] = "\n"
@@ -65,3 +65,10 @@ countN [] _ count = count
 countN (x:xs) n count
     | x==n = countN xs n (count+1)
     | otherwise = countN xs n count
+
+--This was probably more complicated than it needed to be, maybe later ill
+--go back and fix it. But basically there are two processes. First the input
+--list is transformed into a size 10 list where each index is the count of 
+--numbers that were that index. Then, this list is transformed into the text histogram.
+--counter and countN are in charge of the first process, and makeLine and makeLines
+--are in charge of making the final string to be printed.
