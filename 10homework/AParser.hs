@@ -5,7 +5,6 @@
 module AParser where
 
 import           Control.Applicative
-
 import           Data.Char
 import Data.Maybe (isNothing, fromMaybe, fromJust)
 import Data.Time.Format.ISO8601 (yearFormat)
